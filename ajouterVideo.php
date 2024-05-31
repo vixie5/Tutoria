@@ -21,13 +21,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $videoUrl = $connex->real_escape_string($_POST['url_video']);
     $chapId = intval($_POST['chapitre_id']);
 
-    $sql = "INSERT INTO videos (titre_video, url_video, chapitre_id) VALUES ('$videoTitre', '$videoUrl', '$chapId')";
+    $sqlReq = "INSERT INTO videos (titre_video, url_video, chapitre_id) VALUES ('$videoTitre', '$videoUrl', '$chapId')";
 
-    if ($connex->query($sql) === TRUE) {
+    if ($connex->query($sqlReq) === TRUE) {
         header('Location: dashboardFormateur.php');
         exit();
     } else {
-        echo "Erreur : " . $sql . "<br>" . $connex->error;
+        echo "Erreur : " . $sqlReq . "<br>" . $connex->error;
     }
     $connex->close();
 }

@@ -19,11 +19,11 @@ if ($connex->connect_error) {
 if (isset($_GET['id'])) {
     $id = intval($_GET['id']);
 
-    $sqlsupprVideo = "DELETE FROM videos WHERE chapitre_id='$id'";
-    $connex->query($sqlsupprVideo);
+    $sqlReq = "DELETE FROM videos WHERE chapitre_id='$id'";
+    $connex->query($sqlReq);
 
-    $sqlsupprchap = "DELETE FROM chapitres WHERE id='$id'";
-    if ($connex->query($sqlsupprchap) === TRUE) {
+    $sqlReq = "DELETE FROM chapitres WHERE id='$id'";
+    if ($connex->query($sqlReq) === TRUE) {
         $theme = isset($_COOKIE['theme']) ? $_COOKIE['theme'] : 'light';
         header("Location: dashboardFormateur.php?theme=$theme");
         exit();

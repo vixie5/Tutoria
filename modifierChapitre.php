@@ -20,8 +20,8 @@ if (isset($_POST['submit'])) {
     $id = intval($_POST['id']);
     $chapId = $connex->real_escape_string($_POST['titre_chapitre']);
 
-    $chapUp = "UPDATE chapitres SET titre_chapitre='$chapId' WHERE id='$id'";
-    if ($connex->query($chapUp) === TRUE) {
+    $sqlReq = "UPDATE chapitres SET titre_chapitre='$chapId' WHERE id='$id'";
+    if ($connex->query($sqlReq) === TRUE) {
         header('Location: dashboardFormateur.php');
         exit();
     } else {

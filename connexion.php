@@ -16,8 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $requete = "SELECT * FROM users WHERE username='$username'";
-    $resultat = $connex->query($requete);
+    $sqlReq = "SELECT * FROM users WHERE username='$username'";
+    $resultat = $connex->query($sqlReq);
 
     if ($resultat->num_rows > 0) {
         $row = $resultat->fetch_assoc();

@@ -115,8 +115,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($resultat->num_rows > 0) {
         echo "<div class='alert alert-danger mt-3'>Cet utilisateur existe déjà.</div>";
     } else {
-        $requete = "INSERT INTO users (username, email, password, role, bio, pdp) VALUES ('$username','$email','$password', '$role', '$bio', '$pdp')";
-        if ($connex->query($requete) === TRUE) {
+        $sqlReq = "INSERT INTO users (username, email, password, role, bio, pdp) VALUES ('$username','$email','$password', '$role', '$bio', '$pdp')";
+        if ($connex->query($sqlReq) === TRUE) {
             if ($role == 'formateur') {
                 header("Location: dashboardFormateur.php");
             } else {
@@ -124,7 +124,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             exit();
         } else {
-            echo "<div class='alert alert-danger mt-3'>Erreur : " . $requete . "<br>" . $connex->error . "</div>";
+            echo "<div class='alert alert-danger mt-3'>Erreur : " . $sqlReq . "<br>" . $connex->error . "</div>";
         }
     }
 

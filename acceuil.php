@@ -33,7 +33,7 @@
             --card-border-color: #444;
             --flash-sale-bg: #ffd700;
             --new-label-bg: #9370db;
-            --card-shadow: rgba(255, 255, 255, 0.1);
+            --card-shadow: rgba(255, 255, 255, 0.1);  
             --badge-color: #f0f8ff;
         }
         body {
