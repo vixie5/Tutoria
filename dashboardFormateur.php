@@ -5,16 +5,7 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'formateur') {
     exit();
 }
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "tutoria";
-
-$connex = new mysqli($servername, $username, $password, $dbname);
-
-if ($connex->connect_error) {
-    die("Échec de la connexion : " . $connex->connect_error);
-}
+include 'include/bsd.php';
 
 $formateurUsername = $_SESSION['username'];
 
@@ -28,9 +19,10 @@ $resultat = $connex->query($sqlReq);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formateur</title>
-    <link rel="icon" type="image/png" href="images/logoTutoria.png">
+    <link rel="icon" type="image/png" href="assets/images/logoTutoria.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <style>
         .light-theme {
             --bg-color: #f0f8ff;
@@ -161,37 +153,8 @@ $resultat = $connex->query($sqlReq);
 </head>
 <body class="light-theme" id="theme-body">
 
-<nav class="navbar navbar-expand-lg navbar-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-            <img src="images/tutoria.png" alt="Logo" width="155" height="50" class="d-inline-block align-text-top">
-        </a>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="menuDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <?php echo htmlspecialchars($_SESSION['username']); ?>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="menuDropdown">
-                        <li><a class="dropdown-item" href="deconnexion.php">Déconnexion</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <div class="vr"></div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="themeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Thème
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="themeDropdown">
-                        <li><a class="dropdown-item" href="#" onclick="setLightTheme()">Clair</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="setDarkTheme()">Sombre</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<!-- navbar avec un include -->
+<?php include 'include/navbar.php'; ?>
 
 <div class="container">
     <h2 class="mb-4">Vos Formations</h2>

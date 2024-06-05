@@ -5,16 +5,7 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'formateur') {
     exit();
 }
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "tutoria";
-
-$connex = new mysqli($servername, $username, $password, $dbname);
-
-if ($connex->connect_error) {
-    die("Échec de la connexion : " . $connex->connect_error);
-}
+include 'include/bsd.php';
 
 if (isset($_POST['submit'])) {
     $id = intval($_POST['id']);

@@ -6,16 +6,8 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'formateur') {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "tutoria";
+    include 'include/bsd.php';
 
-    $connex = new mysqli($servername, $username, $password, $dbname);
-
-    if ($connex->connect_error) {
-        die("Échec de la connexion : " . $connex->connect_error);
-    }
 
     $titreFormation = $_POST['titre_chapitre'];
     $formateurId = $_SESSION['user_id'];
@@ -38,8 +30,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajouter Formation</title>
-    <link rel="icon" type="image/png" href="images/logoTutoria.png">
+    <link rel="icon" type="image/png" href="assets/images/logoTutoria.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
     <style>
         body {
             background-color: #f0f8ff;
@@ -55,15 +48,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     </style>
 </head>
-<body>
+<body id="ajoutFormation">
 
-<nav class="navbar navbar-expand-lg navbar-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-            <img src="images/logoTutoria.png" alt="Logo" width="155" height="50">
-        </a>
-    </div>
-</nav>
+<!-- navbar avec un include -->
+<?php include 'include/navbar.php'; ?>
 
 <div class="container">
     <h2>Ajouter Formation</h2>

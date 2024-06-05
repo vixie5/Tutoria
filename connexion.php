@@ -1,16 +1,7 @@
 <?php
 session_start();
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "tutoria";
-
-$connex = new mysqli($servername, $username, $password, $dbname);
-
-if ($connex->connect_error) {
-    die("Échec de la connexion : " . $connex->connect_error);
-}
+include 'include/bsd.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
@@ -50,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
-    <link rel="icon" type="image/png" href="images/logoTutoria.png">
+    <link rel="icon" type="image/png" href="assets/images/logoTutoria.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
         body {

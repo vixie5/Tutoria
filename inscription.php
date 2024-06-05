@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription</title>
-    <link rel="icon" type="image/png" href="images/logoTutoria.png">
+    <link rel="icon" type="image/png" href="assets/images/logoTutoria.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
     <style>
         body {
             background-color: #e0e7ff;
@@ -78,16 +79,7 @@
 </div>
 
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "tutoria";
-
-$connex = new mysqli($servername, $username, $password, $dbname);
-
-if ($connex->connect_error) {
-    die("Échec de la connexion : " . $connex->connect_error);
-}
+include 'include/bsd.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
@@ -98,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pdp = '';
 
     if ($role == 'formateur' && isset($_FILES['pdp'])) {
-        $repertoire = "C:/wamp64/www/projetStage/images/";
+        $repertoire = "C:/wamp64/www/projetStage/Tutoria/images/";
         $typeImg = strtolower(pathinfo($_FILES["pdp"]["name"], PATHINFO_EXTENSION));
         $newName = $username . '.' . $typeImg;
         $fichier = $repertoire . $newName;

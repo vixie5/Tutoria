@@ -5,17 +5,9 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'formateur') {
     exit();
 }
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "tutoria";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $connex = new mysqli($servername, $username, $password, $dbname);
-
-    if ($connex->connect_error) {
-        die("Échec de la connexion : " . $connex->connect_error);
-    }
+    include 'include/bsd.php';
 
     $videoTitre = $connex->real_escape_string($_POST['titre_video']);
     $videoUrl = $connex->real_escape_string($_POST['url_video']);
@@ -39,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajouter Vidéo</title>
-    <link rel="icon" type="image/png" href="images/logoTutoria.png">
+    <link rel="icon" type="image/png" href="assets/images/logoTutoria.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -58,13 +50,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-            <img src="images/logoTutoria.png" alt="Logo" width="155" height="50">
-        </a>
-    </div>
-</nav>
+<!-- navbar avec un include -->
+<?php include 'include/navbar.php'; ?>
 
 <div class="container">
     <h2>Ajouter Vidéo</h2>
