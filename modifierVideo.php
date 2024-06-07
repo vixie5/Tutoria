@@ -46,8 +46,14 @@ $connex->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modifier Vidéo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+
+<body class="light-theme" id="modifVideo">
+
+    <!-- navbar avec un include -->
+    <?php include 'include/navbar.php'; ?>
+
 <div class="container">
     <h2 class="my-4">Modifier Vidéo</h2>
     <form method="post" action="">
@@ -61,8 +67,12 @@ $connex->close();
             <input type="url" class="form-control" id="url_video" name="url_video" value="<?php echo htmlspecialchars($video['url_video']); ?>" required>
         </div>
         <button type="submit" name="submit" class="btn btn-primary">Modifier</button>
+        <a href="dashboardFormateur.php" class="btn btn-warning">Retour</a>
     </form>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="assets/js/theme.js"></script>
+
 </body>
 </html>

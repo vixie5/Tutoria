@@ -23,135 +23,9 @@ $resultat = $connex->query($sqlReq);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    <style>
-        .light-theme {
-            --bg-color: #f0f8ff;
-            --text-color: #000;
-            --navbar-bg: #ffffff;
-            --navbar-text-color: #000;
-            --link-color: #ff6347;
-            --link-hover-color: #4682b4;
-            --card-bg-color: #fff;
-            --card-border-color: #ddd;
-            --flash-sale-bg: #ffd700;
-            --new-label-bg: #9370db;
-            --card-shadow: rgba(0, 0, 0, 0.1);
-            --badge-color: #fff;
-        }
-        .dark-theme {
-            --bg-color: #2b2b2b;
-            --text-color: #f0f8ff;
-            --navbar-bg: #333;
-            --navbar-text-color: #f0f8ff;
-            --link-color: #87cefa;
-            --link-hover-color: #b22222;
-            --card-bg-color: #3a3a3a;
-            --card-border-color: #444;
-            --flash-sale-bg: #ffd700;
-            --new-label-bg: #9370db;
-            --card-shadow: rgba(255, 255, 255, 0.1);
-            --badge-color: #f0f8ff;
-        }
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-        }
-        .navbar {
-            background-color: var(--navbar-bg);
-        }
-        .navbar-brand,
-        .nav-link {
-            color: var(--navbar-text-color) !important;
-        }
-        .nav-link:hover {
-            color: var(--link-hover-color) !important;
-        }
-        .dropdown-menu {
-            background-color: var(--navbar-bg);
-        }
-        .dropdown-item {
-            color: var(--navbar-text-color) !important;
-        }
-        .dropdown-item:hover {
-            background-color: var(--link-hover-color) !important;
-            color: var(--text-color) !important;
-        }
-        .vr {
-            border-left: 1px solid var(--navbar-text-color);
-            height: 40px;
-            margin: 0 15px;
-        }
-        .container {
-            margin-top: 40px;
-        }
-        .card {
-            border-radius: 10px;
-            box-shadow: 0 4px 8px var(--card-shadow);
-            border: 1px solid var(--card-border-color);
-            background-color: var(--card-bg-color);
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 30px;
-        }
-        .card-body {
-            background-color: var(--card-bg-color);
-        }
-        .badge {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            padding: 5px 10px;
-            border-radius: 5px;
-            color: var(--badge-color);
-        }
-        .dark-theme .card-title,
-        .dark-theme .card-text {
-            color: #f0f8ff;
-        }
-        .dark-theme .video-title {
-            color: #f0f8ff;
-        }
-        .card-img-top {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            position: absolute;
-            top: 10px;
-            left: 10px;
-        }
-        .card-title, .card-text {
-            text-align: center;
-        }
-        .card-text {
-            margin-top: 30px;
-        }
-        .card-section {
-            margin-bottom: 20px;
-        }
-        .icon-action {
-            margin-left: 10px;
-            cursor: pointer;
-            color: gray;
-            font-size: 0.8em;
-        }
-        .icon-action:hover {
-            color: var(--link-hover-color);
-        }
-        .btn-yellow {
-            background-color: #ffd700;
-            color: #000;
-            border: none;
-        }
-        .btn-yellow:hover {
-            background-color: #e6be00;
-            color: #000;
-        }
-        .icon-action.text-warning {
-            color: gray !important;
-        }
-    </style>
 </head>
-<body class="light-theme" id="theme-body">
+
+<body class="light-theme" id="dashboardFormateur">
 
 <!-- navbar avec un include -->
 <?php include 'include/navbar.php'; ?>
@@ -204,40 +78,15 @@ $resultat = $connex->query($sqlReq);
     }
     ?>
     <div class="d-flex justify-content-end mt-4">
-        <a href="ajouterFormation.php" class="btn btn-yellow me-2">Ajouter Formation</a>
-        <a href="ajouterClient.php" class="btn btn-yellow">Ajouter Client</a>
+        <a href="ajouterFormation.php" class="btn btn-warning me-2">Ajouter Formation</a>
+        <a href="ajouterClient.php" class="btn btn-warning">Ajouter Client</a>
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    function setLightTheme() {
-        document.body.className = 'light-theme';
-        document.cookie = "theme=light; path=/";
-    }
 
-    function setDarkTheme() {
-        document.body.className = 'dark-theme';
-        document.cookie = "theme=dark; path=/";
-    }
+<script src="assets/js/theme.js"></script>
 
-    function getCookie(name) {
-        let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-        if (match) {
-            return match[2];
-        }
-        return null;
-    }
-
-    window.onload = function() {
-        let theme = getCookie('theme');
-        if (theme === 'dark') {
-            setDarkTheme();
-        } else {
-            setLightTheme();
-        }
-    };
-</script>
 </body>
 </html>
 

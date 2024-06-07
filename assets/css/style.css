@@ -1,4 +1,7 @@
-#acceuil 
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
 .light-theme {
     --bg-color: #f0f8ff;
     --text-color: #000;
@@ -24,12 +27,8 @@
     --card-border-color: #444;
     --flash-sale-bg: #ffd700;
     --new-label-bg: #9370db;
-    --card-shadow: rgba(255, 255, 255, 0.1);  
+    --card-shadow: rgba(255, 255, 255, 0.1);
     --badge-color: #f0f8ff;
-}
-body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
 }
 .navbar {
     background-color: var(--navbar-bg);
@@ -59,9 +58,6 @@ body {
 .container {
     margin-top: 40px;
 }
-.section-title {
-    margin: 40px 0 20px;
-}
 .card {
     border-radius: 10px;
     box-shadow: 0 4px 8px var(--card-shadow);
@@ -69,6 +65,7 @@ body {
     background-color: var(--card-bg-color);
     position: relative;
     overflow: hidden;
+    margin-bottom: 30px;
 }
 .card-body {
     background-color: var(--card-bg-color);
@@ -85,6 +82,9 @@ body {
 .dark-theme .card-text {
     color: #f0f8ff;
 }
+.dark-theme .video-title {
+    color: #f0f8ff;
+}
 .card-img-top {
     width: 50px;
     height: 50px;
@@ -97,6 +97,29 @@ body {
     text-align: center;
 }
 .card-text {
-    margin-top: 30px; /* espace img txt*/
+    margin-top: 30px;
 }
-
+.card-section {
+    margin-bottom: 20px;
+}
+.icon-action {
+    margin-left: 10px;
+    cursor: pointer;
+    color: gray;
+    font-size: 0.8em;
+}
+.icon-action:hover {
+    color: var(--link-hover-color);
+}
+.btn-yellow {
+    background-color: #ffd700;
+    color: #000;
+    border: none;
+}
+.btn-yellow:hover {
+    background-color: #e6be00;
+    color: #000;
+}
+.icon-action.text-warning {
+    color: gray !important;
+}

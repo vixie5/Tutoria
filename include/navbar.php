@@ -11,7 +11,7 @@
                             <?php echo htmlspecialchars($_SESSION['username']); ?>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="menuDropdown">
-                            <li><a class="dropdown-item" href="deconnexion.php">Déconnexion</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="deconnexion()">Déconnexion</a></li>
                         </ul>
                     </li>
                 <?php else: ?>
@@ -33,8 +33,8 @@
                         Thème
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="themeDropdown">
-                        <li><a class="dropdown-item" href="#" onclick="setLightTheme()">Clair</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="setDarkTheme()">Sombre</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="setLightTheme(); console.log('Clair')">Clair</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="setDarkTheme(); console.log('Sombre')">Sombre</a></li>
                     </ul>
                 </li>
             </ul>

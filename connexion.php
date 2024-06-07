@@ -85,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 
 <div class="login-container">
-    <img src="images/logoTutoria.png" alt="Logo">
+<img src="assets/images/logoTutoria.png" alt="Logo">
     <h3>Connexion</h3>
     <form method="POST" action="">
         <input type="text" class="form-control" id="username" name="username" placeholder="Nom d'utilisateur" required>

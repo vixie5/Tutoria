@@ -52,7 +52,7 @@
 <body>
 
 <div class="signup-container">
-    <img src="images/logoTutoria.png" alt="Logo">
+<img src="assets/images/logoTutoria.png" alt="Logo">
     <h3>Inscription</h3>
     <form method="POST" action="" enctype="multipart/form-data">
         <input type="text" class="form-control" id="username" name="username" placeholder="Nom d'utilisateur" required>
@@ -90,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pdp = '';
 
     if ($role == 'formateur' && isset($_FILES['pdp'])) {
-        $repertoire = "C:/wamp64/www/projetStage/Tutoria/images/";
+        $repertoire = "C:/wamp64/www/projetStage/Tutoria/assets/images";
         $typeImg = strtolower(pathinfo($_FILES["pdp"]["name"], PATHINFO_EXTENSION));
         $newName = $username . '.' . $typeImg;
         $fichier = $repertoire . $newName;

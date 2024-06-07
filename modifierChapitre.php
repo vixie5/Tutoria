@@ -44,11 +44,18 @@ $connex->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modifier Chapitre</title>
+    <link rel="icon" type="image/png" href="assets/images/logoTutoria.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+
+<body class="light-theme" id="modifChap">
+
+    <!-- navbar avec un include -->
+<?php include 'include/navbar.php'; ?>
+
 <div class="container">
-    <h2 class="my-4">Modifier Chapitre</h2>
+    <h2 class="my-4">Modifier Formation</h2>
     <form method="post" action="">
         <input type="hidden" name="id" value="<?php echo $chapitre['id']; ?>">
         <div class="mb-3">
@@ -56,8 +63,12 @@ $connex->close();
             <input type="text" class="form-control" id="titre_chapitre" name="titre_chapitre" value="<?php echo htmlspecialchars($chapitre['titre_chapitre']); ?>" required>
         </div>
         <button type="submit" name="submit" class="btn btn-primary">Modifier</button>
+        <a href="dashboardFormateur.php" class="btn btn-warning">Retour</a>
     </form>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="assets/js/theme.js"></script>
+
 </body>
 </html>

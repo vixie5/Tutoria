@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
+
 <body class="light-theme" id="acceuil">
 
 <!-- navbar avec un include -->
@@ -56,14 +57,8 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<script>
-    function setLightTheme() {
-        document.body.className = 'light-theme';
-    }
 
-    function setDarkTheme() {
-        document.body.className = 'dark-theme';
-    }
-</script>
+<script src="assets/js/theme.js"></script>
+
 </body>
 </html>

@@ -33,22 +33,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="icon" type="image/png" href="assets/images/logoTutoria.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
-    <style>
-        body {
-            background-color: #f0f8ff;
-        }
-        .navbar {
-            background-color: #fff;
-        }
-        .navbar-brand, .nav-link {
-            color: #000 !important;
-        }
-        .container {
-            margin-top: 40px;
-        }
-    </style>
 </head>
-<body id="ajoutFormation">
+
+<body class="light-theme" id="ajoutFormation">
 
 <!-- navbar avec un include -->
 <?php include 'include/navbar.php'; ?>
@@ -60,10 +47,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label for="titre_chapitre" class="form-label">Titre de la formation</label>
             <input type="text" class="form-control" id="titre_chapitre" name="titre_chapitre" required>
         </div>
-        <button type="submit" class="btn btn-success">Ajouter Formation</button>
+        <button type="submit" class="btn btn-primary">Ajouter Formation</button>
+        <a href="dashboardFormateur.php" class="btn btn-warning">Retour</a>
     </form>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="assets/js/theme.js"></script>
+
 </body>
 </html>
