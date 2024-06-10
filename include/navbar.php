@@ -11,7 +11,7 @@
                             <?php echo htmlspecialchars($_SESSION['username']); ?>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="menuDropdown">
-                            <li><a class="dropdown-item" href="#" onclick="deconnexion()">Déconnexion</a></li>
+                            <li><a class="dropdown-item" href="deconnexion.php">Déconnexion</a></li>
                         </ul>
                     </li>
                 <?php else: ?>

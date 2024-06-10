@@ -23,6 +23,14 @@ $resultat = $connex->query($sqlReq);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <script>
+        function confirmDeletion(type, id) {
+            let message = type === 'chapitre' ? "Êtes-vous sûr de vouloir supprimer ce chapitre et toutes ses vidéos ?" : "Êtes-vous sûr de vouloir supprimer cette vidéo ?";
+            if (confirm(message)) {
+                window.location.href = type === 'chapitre' ? 'supprimerChapitre.php?id=' + id : 'supprimerVideo.php?id=' + id;
+            }
+        }
+    </script>
 </head>
 
 <body class="light-theme" id="dashboardFormateur">
@@ -42,7 +50,7 @@ $resultat = $connex->query($sqlReq);
                             {$row['titre_chapitre']}
                             <span>
                                 <a href='modifierChapitre.php?id={$row['id']}' class='text-primary icon-action'><i class='fas fa-pen'></i></a>
-                                <a href='supprimerChapitre.php?id={$row['id']}' class='text-secondary icon-action'><i class='fas fa-trash-alt'></i></a>
+                                <a href='javascript:void(0);' onclick='confirmDeletion(\"chapitre\", {$row['id']})' class='text-secondary icon-action'><i class='fas fa-trash-alt'></i></a>
                             </span>
                         </h5>";
 
@@ -60,7 +68,7 @@ $resultat = $connex->query($sqlReq);
                             </div>
                             <span>
                                 <a href='modifierVideo.php?id={$video_row['id']}' class='text-primary icon-action'><i class='fas fa-pen'></i></a>
-                                <a href='supprimerVideo.php?id={$video_row['id']}' class='text-secondary icon-action'><i class='fas fa-trash-alt'></i></a>
+                                <a href='javascript:void(0);' onclick='confirmDeletion(\"video\", {$video_row['id']})' class='text-secondary icon-action'><i class='fas fa-trash-alt'></i></a>
                             </span>
                           </div>";
                 }
@@ -84,7 +92,6 @@ $resultat = $connex->query($sqlReq);
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
 <script src="assets/js/theme.js"></script>
 
 </body>
