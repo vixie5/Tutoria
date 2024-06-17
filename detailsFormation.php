@@ -46,8 +46,8 @@ $resultVideos = $stmtVideos->get_result();
 <!-- navbar avec un include -->
 <?php include 'include/navbar.php'; ?>
 
-<div class="container-fluid">
-    <div class="row">
+<div class="container-fluid h-100">
+    <div class="row h-100">
         <nav class="col-md-3 sidebar">
             <?php if ($resultVideos->num_rows > 0): ?>
                 <?php while($video = $resultVideos->fetch_assoc()): ?>

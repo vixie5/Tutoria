@@ -12,7 +12,31 @@ if (isset($_POST['submit'])) {
     $videoTitre = $connex->real_escape_string($_POST['titre_video']);
     $videoUrl = $connex->real_escape_string($_POST['url_video']);
 
-    $videoUp = "UPDATE videos SET titre_video='$videoTitre', url_video='$videoUrl' WHERE id='$id'";
+    $miniaturePath = null;
+    if ($_POST['miniature_option'] == 'custom') {
+        if (!empty($_FILES['miniature']['name'])) {
+            // Upload de la nouvelle miniature
+            $miniature = $_FILES['miniature'];
+            $extension = pathinfo($miniature['name'], PATHINFO_EXTENSION);
+            $miniaturePath = 'assets/images/' . preg_replace('/[^A-Za-z0-9\-]/', '_', $videoTitre) . '.' . $extension;
+            $uploadPath = 'C:/wamp64/www/projetStage/Tutoria/' . $miniaturePath;
+
+            if (!move_uploaded_file($miniature['tmp_name'], $uploadPath)) {
+                echo "Erreur lors de l'upload de la miniature.";
+                exit();
+            }
+        }
+    } elseif ($_POST['miniature_option'] == 'url') {
+        // Assurez-vous de gérer l'obtention de la miniature à partir de l'URL de la vidéo
+        $miniaturePath = getVideoThumbnail($videoUrl);
+    }
+
+    if ($miniaturePath) {
+        $videoUp = "UPDATE videos SET titre_video='$videoTitre', url_video='$videoUrl', miniature='$miniaturePath' WHERE id='$id'";
+    } else {
+        $videoUp = "UPDATE videos SET titre_video='$videoTitre', url_video='$videoUrl' WHERE id='$id'";
+    }
+
     if ($connex->query($videoUp) === TRUE) {
         header('Location: dashboardFormateur.php');
         exit();
@@ -37,6 +61,15 @@ if (isset($_POST['submit'])) {
 }
 
 $connex->close();
+
+function getVideoThumbnail($videoUrl) {
+    // Extraire l'ID de la vidéo de YouTube
+    if (preg_match('/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/', $videoUrl, $matches)) {
+        $videoId = $matches[1];
+        return "https://img.youtube.com/vi/$videoId/0.jpg"; // URL de la miniature YouTube
+    }
+    return null;
+}
 ?>
 
 <!DOCTYPE html>
@@ -51,12 +84,12 @@ $connex->close();
 
 <body class="light-theme" id="modifVideo">
 
-    <!-- navbar avec un include -->
-    <?php include 'include/navbar.php'; ?>
+<!-- navbar avec un include -->
+<?php include 'include/navbar.php'; ?>
 
 <div class="container">
     <h2 class="my-4">Modifier Vidéo</h2>
-    <form method="post" action="">
+    <form method="post" action="" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?php echo $video['id']; ?>">
         <div class="mb-3">
             <label for="titre_video" class="form-label">Titre de la Vidéo</label>
@@ -65,6 +98,17 @@ $connex->close();
         <div class="mb-3">
             <label for="url_video" class="form-label">URL de la Vidéo</label>
             <input type="url" class="form-control" id="url_video" name="url_video" value="<?php echo htmlspecialchars($video['url_video']); ?>" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Miniature de la Vidéo</label><br>
+            <input type="radio" id="miniature_url" name="miniature_option" value="url" <?php if (empty($video['miniature'])) echo 'checked'; ?>>
+            <label for="miniature_url">Utiliser la miniature de l'URL de la vidéo</label><br>
+            <input type="radio" id="miniature_custom" name="miniature_option" value="custom" <?php if (!empty($video['miniature'])) echo 'checked'; ?>>
+            <label for="miniature_custom">Télécharger une miniature personnalisée</label>
+            <?php if (!empty($video['miniature'])): ?>
+                <img src="<?php echo htmlspecialchars($video['miniature']); ?>" alt="Miniature actuelle" class="img-fluid mb-2">
+            <?php endif; ?>
+            <input type="file" class="form-control mt-2" id="miniature" name="miniature" accept="image/*">
         </div>
         <button type="submit" name="submit" class="btn btn-primary">Modifier</button>
         <a href="dashboardFormateur.php" class="btn btn-warning">Retour</a>
