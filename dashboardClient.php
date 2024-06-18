@@ -42,7 +42,7 @@ $resultatChapitres = $stmtChapitres->get_result();
 
 <div class="container mt-5">
     <h2>Bienvenue, <?php echo htmlspecialchars($_SESSION['username']); ?> !</h2>
-    <div class="F">
+    <div class="titreForma">
     <h3>Voici vos formations</h3>
     </div>
     <?php if ($resultatChapitres->num_rows > 0): ?>

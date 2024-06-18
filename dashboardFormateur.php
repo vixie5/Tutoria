@@ -30,6 +30,11 @@ $resultat = $connex->query($sqlReq);
                 window.location.href = type === 'chapitre' ? 'supprimerChapitre.php?id=' + id : 'supprimerVideo.php?id=' + id;
             }
         }
+
+        function openShareModal(chapitreId) {
+            document.getElementById('shareModal').style.display = 'block';
+            document.getElementById('chapitreId').value = chapitreId;
+        }
     </script>
 </head>
 
@@ -45,14 +50,15 @@ $resultat = $connex->query($sqlReq);
         while ($row = $resultat->fetch_assoc()) {
             $chapitreId = $row['id'];
             echo "<div class='card'>
-                    <div class='card-body'>
-                        <h5 class='card-title d-flex justify-content-between'>
-                            {$row['titre_chapitre']}
-                            <span>
-                                <a href='modifierChapitre.php?id={$row['id']}' class='text-primary icon-action'><i class='fas fa-pen'></i></a>
-                                <a href='javascript:void(0);' onclick='confirmDeletion(\"chapitre\", {$row['id']})' class='text-secondary icon-action'><i class='fas fa-trash-alt'></i></a>
-                            </span>
-                        </h5>";
+            <div class='card-body'>
+                <h5 class='card-title d-flex justify-content-between'>
+                    {$row['titre_chapitre']}
+                    <span>
+                        <a href='modifierChapitre.php?id={$row['id']}' class='text-primary icon-action'><i class='fas fa-pen'></i></a>
+                        <a href='javascript:void(0);' onclick='confirmDeletion(\"chapitre\", {$row['id']})' class='text-secondary icon-action'><i class='fas fa-trash-alt'></i></a>
+                        <a href='javascript:void(0);' onclick='openShareModal({$row['id']})' class='text-success icon-action'><i class='fas fa-share-alt'></i></a>
+                    </span>
+                </h5>";
 
             // recup video chap
             $reqVideo = "SELECT * FROM videos WHERE chapitre_id='$chapitreId'";
@@ -85,6 +91,7 @@ $resultat = $connex->query($sqlReq);
         echo "<p>Aucun chapitre trouvé.</p>";
     }
     ?>
+
     <div class="d-flex justify-content-end mt-4">
         <a href="ajouterFormation.php" class="btn btn-warning me-2">Ajouter Formation</a>
         <a href="ajouterClient.php" class="btn btn-warning">Ajouter Client</a>
@@ -93,6 +100,27 @@ $resultat = $connex->query($sqlReq);
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="assets/js/theme.js"></script>
+
+<div id="shareModal" class="modal" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Générer un lien temporaire</h5>
+                <button type="button" class="btn-close" onclick="document.getElementById('shareModal').style.display='none';"></button>
+            </div>
+            <div class="modal-body">
+                <form id="shareForm" action="generationLien.php" method="post">
+                    <input type="hidden" id="chapitreId" name="chapitreId">
+                    <div class="mb-3">
+                        <label for="expirationDate" class="form-label">Date d'expiration</label>
+                        <input type="date" id="expirationDate" name="expirationDate" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-warning">Générer le lien</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

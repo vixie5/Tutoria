@@ -16,17 +16,17 @@ $chapitreId = $_GET['chapitre_id'];
 
 // Récupérer les informations sur le chapitre et les vidéos associées
 $sqlChapitre = "SELECT titre_chapitre FROM chapitres WHERE id = ?";
-$stmtChapitre = $connex->prepare($sqlChapitre);
-$stmtChapitre->bind_param("i", $chapitreId);
-$stmtChapitre->execute();
-$resultChapitre = $stmtChapitre->get_result();
-$chapitre = $resultChapitre->fetch_assoc();
+$stmtChap = $connex->prepare($sqlChapitre);
+$stmtChap->bind_param("i", $chapitreId);
+$stmtChap->execute();
+$resultatChap = $stmtChap->get_result();
+$chapitre = $resultatChap->fetch_assoc();
 
 $sqlVideos = "SELECT id, titre_video, url_video FROM videos WHERE chapitre_id = ?";
 $stmtVideos = $connex->prepare($sqlVideos);
 $stmtVideos->bind_param("i", $chapitreId);
 $stmtVideos->execute();
-$resultVideos = $stmtVideos->get_result();
+$resultatVideos = $stmtVideos->get_result();
 ?>
 
 <!DOCTYPE html>
@@ -39,6 +39,7 @@ $resultVideos = $stmtVideos->get_result();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
 </head>
 
 <body class="light-theme" id="detailsFormation">
@@ -49,8 +50,8 @@ $resultVideos = $stmtVideos->get_result();
 <div class="container-fluid h-100">
     <div class="row h-100">
         <nav class="col-md-3 sidebar">
-            <?php if ($resultVideos->num_rows > 0): ?>
-                <?php while($video = $resultVideos->fetch_assoc()): ?>
+            <?php if ($resultatVideos->num_rows > 0): ?>
+                <?php while($video = $resultatVideos->fetch_assoc()): ?>
                     <div class="video-item" onclick="changeVideo('<?php echo htmlspecialchars($video['url_video']); ?>')">
                         <h4 class="video-title"><?php echo htmlspecialchars($video['titre_video']); ?></h4>
                     </div>
@@ -79,7 +80,7 @@ $resultVideos = $stmtVideos->get_result();
 </html>
 
 <?php
-$stmtChapitre->close();
+$stmtChap->close();
 $stmtVideos->close();
 $connex->close();
 ?>
