@@ -11,7 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $chapitreId = $_POST['chapitreId'];
     $expirationDate = $_POST['expirationDate'];
 
-    $lien = "clientFormation.php?chapitreId=$chapitreId&token=" . bin2hex(random_bytes(16));
+    $token = bin2hex(random_bytes(16));
+    $lien = "http://127.0.0.2/projetStage/Tutoria/clientFormation.php?chapitreId=$chapitreId&token=$token";
 
     $formateurId = $connex->query("SELECT id FROM users WHERE username='{$_SESSION['username']}'")->fetch_assoc()['id'];
 

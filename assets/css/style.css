@@ -17,6 +17,8 @@ body {
     --new-label-bg: #9370db;
     --card-shadow: rgba(0, 0, 0, 0.1);
     --badge-color: #fff;
+    --folder-description-bg: #f8f9fa;
+    --folder-description-text: #000;
 }
 
 .dark-theme {
@@ -32,6 +34,8 @@ body {
     --new-label-bg: #9370db;
     --card-shadow: rgba(255, 255, 255, 0.1);
     --badge-color: #f0f8ff;
+    --folder-description-bg: #333;
+    --folder-description-text: #fff;
 }
 
 .navbar {
@@ -152,14 +156,14 @@ body {
 
 @media (min-width: 900px) {
     #detailsFormation {
-        overflow-y: hidden; /* retire defilement verticale page */
+        overflow-y: hidden;
     }
 }
 
 #detailsFormation .sidebar {
     background-color: var(--bg-color) !important;
     height: calc(100vh - 56px) !important;
-    overflow-y: auto !important; /* barre defilement chap */
+    overflow-y: auto !important;
     padding: 20px !important;
     border-right: 1px solid var(--card-border-color) !important;
 }
@@ -193,7 +197,6 @@ body {
     overflow: hidden !important;
 }
 
-/* (lecteur video) */
 #detailsFormation .iframe-container { 
     position: relative !important;
     width: 95% !important;
@@ -202,7 +205,6 @@ body {
     max-width: 95% !important; 
 }
 
-/* (lecteur video) */
 #detailsFormation .iframe-container iframe {
     position: absolute !important;
     top: 0 !important;
@@ -210,7 +212,6 @@ body {
     width: 100% !important;
     height: 85% !important;
 }
-
 
 #detailsFormation .content-header {
     display: flex !important;
@@ -233,8 +234,13 @@ body {
     margin-top: 1.5rem !important;
 }
 
+#dashboardClient .folder-container {
+    flex: 0 0 calc(33.333% - 1.5rem) !important;
+    margin-bottom: 2rem !important;
+}
+
 #dashboardClient .folder {
-    flex: 0 0 calc(25% - 1.5rem) !important;
+    height: 260px !important;
     border: 1px solid var(--border-color, #e0e0e0) !important;
     border-radius: 10px !important;
     overflow: hidden !important;
@@ -242,9 +248,7 @@ body {
     cursor: pointer !important;
     transition: box-shadow 0.3s ease !important;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
-    height: 260px !important;
     position: relative !important;
-    margin: 15px !important;
     background-color: var(--background-color, #f8f9fa) !important;
     background-size: cover !important;
     background-position: center !important;
@@ -269,14 +273,14 @@ body {
 }
 
 #dashboardClient .folder .title {
-    background-color: rgba(0, 0, 0) !important;
-    color: rgba(255, 255, 255) !important;
+    background-color: rgba(0, 0, 0, 0.7) !important;
+    color: rgba(255, 255, 255, 1) !important;
     transform: translateX(0) !important;
 }
 
 #dashboardClient .folder .inverse-title {
-    background-color: rgba(255, 255, 255) !important;
-    color: rgba(0, 0, 0) !important;
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    color: rgba(0, 0, 0, 1) !important;
     transform: translateX(100%) !important;
 }
 
@@ -286,6 +290,22 @@ body {
 
 #dashboardClient .folder:hover .inverse-title {
     transform: translateX(0) !important;
+}
+
+#dashboardClient .folder-description {
+    margin-top: 1rem !important;
+    padding: 1rem !important;
+    border-radius: 10px !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+    font-family: Arial, sans-serif !important;
+    background-color: var(--folder-description-bg) !important;
+}
+
+#dashboardClient .folder-description p {
+    margin: 0 !important;
+    font-size: 0.9rem !important;
+    line-height: 1.5 !important;
+    color: var(--folder-description-text) !important;
 }
 
 #dashboardClient .title-section {
@@ -312,6 +332,18 @@ body {
     margin-bottom: 24px;
     font-size: 1rem;
     font-weight: 600;
+}
+
+@media (max-width: 992px) {
+    #dashboardClient .folder-container {
+        flex: 0 0 calc(50% - 1rem) !important;
+    }
+}
+
+@media (max-width: 768px) {
+    #dashboardClient .folder-container {
+        flex: 0 0 100% !important;
+    }
 }
 
 

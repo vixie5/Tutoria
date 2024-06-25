@@ -11,12 +11,13 @@ $clientId = $_SESSION['user_id'];
 
 // Récupérer les chapitres associés au client
 $sqlChapitres = "SELECT chapitres.id as chapitre_id, chapitres.titre_chapitre, 
+                 chapitres.description_chapitre,
                  COALESCE(MIN(videos.miniature), '') as miniature 
                  FROM chapitres
                  JOIN formations_clients ON chapitres.formateur_id = formations_clients.formateur_id
                  LEFT JOIN videos ON chapitres.id = videos.chapitre_id
                  WHERE formations_clients.client_id = ?
-                 GROUP BY chapitres.id, chapitres.titre_chapitre";
+                 GROUP BY chapitres.id, chapitres.titre_chapitre, chapitres.description_chapitre";
 $stmtChapitres = $connex->prepare($sqlChapitres);
 $stmtChapitres->bind_param("i", $clientId);
 $stmtChapitres->execute();
@@ -37,20 +38,24 @@ $resultatChapitres = $stmtChapitres->get_result();
 
 <body class="light-theme" id="dashboardClient">
 
-<!-- Navbar avec un include -->
 <?php include 'include/navbar.php'; ?>
 
 <div class="container mt-5">
     <h2>Bienvenue, <?php echo htmlspecialchars($_SESSION['username']); ?> !</h2>
     <div class="titreForma">
-    <h3>Voici vos formations</h3>
+        <h3>Voici vos formations</h3>
     </div>
     <?php if ($resultatChapitres->num_rows > 0): ?>
         <div class="folder-list">
             <?php while($chapitre = $resultatChapitres->fetch_assoc()): ?>
-                <div class="folder" style="background-image: url('<?php echo htmlspecialchars($chapitre['miniature']); ?>');" onclick="location.href='detailsFormation.php?chapitre_id=<?php echo htmlspecialchars($chapitre['chapitre_id']); ?>'">
-                    <div class="title"><?php echo htmlspecialchars($chapitre['titre_chapitre']); ?></div>
-                    <div class="inverse-title"><?php echo htmlspecialchars($chapitre['titre_chapitre']); ?></div>
+                <div class="folder-container">
+                    <div class="folder" style="background-image: url('<?php echo htmlspecialchars($chapitre['miniature']); ?>');" onclick="location.href='detailsFormation.php?chapitre_id=<?php echo htmlspecialchars($chapitre['chapitre_id']); ?>'">
+                        <div class="title"><?php echo htmlspecialchars($chapitre['titre_chapitre']); ?></div>
+                        <div class="inverse-title"><?php echo htmlspecialchars($chapitre['titre_chapitre']); ?></div>
+                    </div>
+                    <div class="folder-description">
+                        <p><?php echo htmlspecialchars($chapitre['description_chapitre']); ?></p>
+                    </div>
                 </div>
             <?php endwhile; ?>
         </div>
