@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (!empty($_FILES['miniature']['name'])) {
             $miniature = $_FILES['miniature'];
             $extension = pathinfo($miniature['name'], PATHINFO_EXTENSION);
-            $miniaturePath = 'assets/images/' . preg_replace('/[^A-Za-z0-9\-]/', '_', $videoTitre) . '.' . $extension;
+            $miniaturePath = 'assets/images/upload/' . preg_replace('/[^A-Za-z0-9\-]/', '_', $videoTitre) . '.' . $extension;
             $uploadPath = 'C:/wamp64/www/projetStage/Tutoria/' . $miniaturePath;
 
             if (!move_uploaded_file($miniature['tmp_name'], $uploadPath)) {

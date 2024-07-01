@@ -39,7 +39,7 @@
             while ($row = $result->fetch_assoc()) {
                 echo '<div class="col-md-4">';
                 echo '<div class="card mb-4">';
-                echo '<img src="assets/images/' . htmlspecialchars($row["pdp"]) . '" alt="Photo de profil" class="card-img-top">';
+                echo '<img src="assets/images/upload/' . htmlspecialchars($row["pdp"]) . '" alt="Photo de profil" class="card-img-top">';
                 echo '<div class="card-body">';
                 echo '<h5 class="card-title">' . htmlspecialchars($row["username"]) . '</h5>';
                 echo '<p class="card-text">' . htmlspecialchars($row["bio"]) . '</p>';
