@@ -21,7 +21,11 @@ if ($resultVerifyLink->num_rows === 0) {
     exit();
 }
 
-$sqlChapitre = "SELECT titre_chapitre FROM chapitres WHERE id = ?";
+// Modifiez cette requête pour inclure le lien PayPal du formateur
+$sqlChapitre = "SELECT c.titre_chapitre, u.lien_paypal 
+                FROM chapitres c 
+                JOIN users u ON c.formateur_id = u.id 
+                WHERE c.id = ?";
 $stmtChap = $connex->prepare($sqlChapitre);
 $stmtChap->bind_param("i", $chapitreId);
 $stmtChap->execute();
@@ -68,6 +72,11 @@ $resultatVideos = $stmtVideos->get_result();
         <main class="col-md-9 video-container">
             <div class="content-header">
                 <h2><?php echo htmlspecialchars($chapitre['titre_chapitre']); ?></h2>
+                <div>
+                    <?php if ($chapitre['lien_paypal']): ?>
+                        <a href="<?php echo htmlspecialchars($chapitre['lien_paypal']); ?>" class="btn btn-primary me-2" target="_blank">Paypal</a>
+                    <?php endif; ?>
+                </div>
             </div>
             <div class="iframe-container">
                 <iframe id="videoPlayer" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

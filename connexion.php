@@ -43,6 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Connexion</title>
     <link rel="icon" type="image/png" href="assets/images/logoTutoria.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         body {
             background-color: #e0e7ff;
@@ -85,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 
 <div class="login-container">
-<img src="assets/images/logoTutoria.png" alt="Logo">
+    <img src="assets/images/logoTutoria.png" alt="Logo">
     <h3>Connexion</h3>
     <form method="POST" action="">
         <input type="text" class="form-control" id="username" name="username" placeholder="Nom d'utilisateur" required>
@@ -94,9 +95,55 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </form>
     <div class="link-container">
         <a href="inscription.php">Inscription</a>
-        <a href="#">Mot de passe oublié ?</a>
+        <a href="#" id="forgotPassword">Mot de passe oublié ?</a>
     </div>
 </div>
+
+<!-- Modal pour le mot de passe oublié -->
+<div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="forgotPasswordModalLabel">Réinitialisation du mot de passe</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="forgotPasswordForm">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Adresse e-mail</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function() {
+    $('#forgotPassword').click(function(e) {
+        e.preventDefault();
+        $('#forgotPasswordModal').modal('show');
+    });
+
+    $('#forgotPasswordForm').submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: 'reset_password.php',
+            method: 'POST',
+            data: { email: $('#email').val() },
+            success: function(response) {
+                alert(response);
+                $('#forgotPasswordModal').modal('hide');
+            },
+            error: function() {
+                alert('Une erreur est survenue. Veuillez réessayer.');
+            }
+        });
+    });
+});
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

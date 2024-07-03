@@ -5,6 +5,8 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'formateur') {
     exit();
 }
 
+$popup = '';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include 'include/bsd.php';
 
@@ -26,12 +28,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_param("ii", $formateurId, $clientId);
 
         if ($stmt->execute() === TRUE) {
-            header('Location: dashboardFormateur.php');
+            // Envoyer l'e-mail au client
+            $to = $clientEmail;
+            $subject = "Bienvenue sur Tutoria";
+            $message = "Bienvenue sur Tutoria ! Vous pouvez accéder à vos formations en cliquant sur ce lien : https://tutoria.sendix.fr/dashboardClient.php";
+            $headers = "From: noreplay@tutoria.sendix.fr\r\n";
+            $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+
+            if (mail($to, $subject, $message, $headers)) {
+                $popup = '<div class="alert alert-success" role="alert">Le client a été ajouté avec succès et un e-mail lui a été envoyé.</div>';
+            } else {
+                $popup = '<div class="alert alert-warning" role="alert">Le client a été ajouté, mais l\'envoi de l\'e-mail a échoué.</div>';
+            }
         } else {
-            echo "Erreur : " . $stmt->error;
+            $popup = '<div class="alert alert-danger" role="alert">Erreur lors de l\'ajout du client : ' . $stmt->error . '</div>';
         }
     } else {
-        echo "Erreur : aucun client trouvé avec cet email.";
+        $popup = '<div class="alert alert-danger" role="alert">Erreur : aucun client trouvé avec cet email.</div>';
     }
 
     $stmt->close();
@@ -56,6 +69,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <?php include 'include/navbar.php'; ?>
 
 <div class="container">
+    <?php
+    if (!empty($popup)) {
+        echo $popup;
+    }
+    ?>
     <h2>Ajouter Client</h2>
     <form action="ajouterClient.php" method="POST">
         <div class="mb-3">

@@ -90,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pdp = '';
 
     if ($role == 'formateur' && isset($_FILES['pdp'])) {
-        $repertoire = "C:/wamp64/www/projetStage/Tutoria/assets/images/upload/";
+        $repertoire = "./assets/images/upload/";
         $typeImg = strtolower(pathinfo($_FILES["pdp"]["name"], PATHINFO_EXTENSION));
         $newName = $username . '.' . $typeImg;
         $fichier = $repertoire . $newName;
